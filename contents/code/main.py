@@ -91,6 +91,8 @@ class CPUTemp(plasmascript.Applet):
             self.showTooltip("<b>Select a sensor from the configuration dialog</b>")
         elif self.source:
             self.setConfigurationRequired(False)
+            font = QFont(self.settings.readEntry("font"))
+            self.label.setFont(font)
             self.connectToSource()
         
     # ---------------------- configuration ------------------------#
@@ -124,8 +126,7 @@ class CPUTemp(plasmascript.Applet):
             if self.source:
                 self.engine.disconnectSource(self.source, self)
             self.source = self.settings.readEntry("sensor").toString()
-            
-        self.label.setFont(font)
+
         self.start()
     
     def updateLabel(self, label, temp):
